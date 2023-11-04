@@ -1,9 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@800&display=swap');
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    list-style-type: none;
 }
 
 body {
     width: 100vw;
+    height: 100vh;
+    padding: 5vh 5vw;
+    background-color: #308391;
+
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    padding: 5vh 5vw;
+    border-radius: 20px;
+    background-color: rgba(237, 236, 236, 0.7);
+    box-shadow: 0 0 10px  #308391, 0 0 20px rgb(36, 36, 36);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.display, .functional {
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    /* color: #a5aeb7; */
+    color: rgb(105, 104, 33);
+}
+
+.display {
+    height: 39%;
+}
+
+.functional {
+    height: 59%;
+}
+
+.total-wrap, .balans-wrap {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vh;
+    font-family: 'Playpen Sans', cursive;
+    padding-top: 20px;
+    font-size: 1.5em;
+}
+
+.balans-wrap {
+    background-color: rgb(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgb(255, 255, 255, 0.9),  0 0 60px rgb(255, 255, 255, 0.7), 0 0 100px rgb(255, 255, 255, 0.5);
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    gap: 1vh;
+}
+
+.tl-income, .balans, .tl-expenses {
+    background-color: rgb(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.tl-income, .tl-expenses {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgb(255, 255, 255, 0.9),  0 0 60px rgb(255, 255, 255, 0.7);
+
+}
+
+.balans  {
+    border: none;
+    font-size: 4em;
+    background-color: transparent;
+    color: rgba(164, 162, 52, 0.7);
 }
