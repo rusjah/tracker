@@ -7,7 +7,53 @@
     <title>Money Tracker </title>
 </head>
 <body>
-   
+    <div class="container">
+        <section class="display">
+            <div class="total-wrap">
+                <h2>Total Income</h2>
+                <div id="tl-income" class="tl-income"></div>
+            </div>
+            
+            <div class="balans-wrap">
+                <h1>Balans</h1>
+                <div id="balans" class="balans"></div>
+            </div>
+            <div class="total-wrap">
+                <h2>Total Expenses</h2>
+                <div id="tl-expenses" class="tl-expenses"></div>
+            </div>
+        </section>
+
+        <section class="functional">
+            <div class="income-wrap">
+                <h2>Income</h2>
+                <div class="in-data">
+                    <input type="number" name="income" id="income">
+                    <input type="text" id="in-resource" class="in-resource">
+                </div>
+                <ul id="in-history" class="history">
+                    <li class="row">
+                        <p>Some Text</p>
+                        <button class="delete-btn">X</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="expenses-wrap">
+                <h2>Expenses</h2>
+                <div class="ex-data">
+                    <input type="number" name="expenses" id="expenses">
+                    <input type="text" id="ex-resource" class="ex-resource">
+                </div>
+                <ul id="ex-history" class="history">
+                    <li class="row">
+                        <p>Some Text</p>
+                        <button class="delete-btn">X</button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
     
     <script src="./main.js"></script>
 </body>
