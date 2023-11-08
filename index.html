@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Money Tracker </title>
 </head>
 <body>
     <div class="container">
+
         <section class="display">
             <div class="total-wrap">
                 <h2>Total Income</h2>
@@ -18,6 +20,7 @@
                 <h1>Balans</h1>
                 <div id="balans" class="balans"></div>
             </div>
+            
             <div class="total-wrap">
                 <h2>Total Expenses</h2>
                 <div id="tl-expenses" class="tl-expenses"></div>
@@ -26,30 +29,28 @@
 
         <section class="functional">
             <div class="income-wrap">
-                <h2>Income</h2>
+                <h2 class="in-heading">Income</h2>
                 <div class="in-data">
-                    <input type="number" name="income" id="income">
+                    <input type="number" name="income" id="income" class="income">
                     <input type="text" id="in-resource" class="in-resource">
+                    <button id="in-btn" class="in-btn">add</button>
                 </div>
                 <ul id="in-history" class="history">
-                    <li class="row">
-                        <p>Some Text</p>
-                        <button class="delete-btn">X</button>
-                    </li>
+                    <!-- <li class="row">
+                        <p id="in-text" class="text">Some Text</p>
+                        <button id="in-delete" class="delete-btn">X</button>
+                    </li> -->
                 </ul>
             </div>
 
             <div class="expenses-wrap">
                 <h2>Expenses</h2>
                 <div class="ex-data">
-                    <input type="number" name="expenses" id="expenses">
+                    <input type="number" name="expenses" id="expenses" class="expenses">
                     <input type="text" id="ex-resource" class="ex-resource">
+                    <button id="ex-btn" class="ex-btn">del</button>
                 </div>
                 <ul id="ex-history" class="history">
-                    <li class="row">
-                        <p>Some Text</p>
-                        <button class="delete-btn">X</button>
-                    </li>
                 </ul>
             </div>
         </section>

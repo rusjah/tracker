@@ -135,6 +135,7 @@ input {
     border-right: 2px solid rgb(155, 155, 27);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    padding-left: 1vw;
 }
 
 .ex-resource, .in-resource {
