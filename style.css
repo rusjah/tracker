@@ -150,6 +150,7 @@ input {
     position: absolute;
     right: 0.2vw;
     width: 10%;
+    min-width: fit-content;
     height: 80%;
     border: none;
     border-radius: 10px;

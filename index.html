@@ -16,7 +16,7 @@
                 <div id="tl-income" class="tl-income"></div>
             </div>
             
-            <div class="balans-wrap">
+            <div id="balans-wrap" class="balans-wrap">
                 <h1>Balans</h1>
                 <div id="balans" class="balans"></div>
             </div>
@@ -30,11 +30,11 @@
         <section class="functional">
             <div class="income-wrap">
                 <h2 class="in-heading">Income</h2>
-                <div class="in-data">
-                    <input type="number" name="income" id="income" class="income">
-                    <input type="text" id="in-resource" class="in-resource">
-                    <button id="in-btn" class="in-btn">add</button>
-                </div>
+                <form id="form-income" class="in-data">
+                    <input required type="number" name="income" id="income" class="income" placeholder="$">
+                    <input required type="text" name="inresource"  id="in-resource" class="in-resource">
+                    <button id="in-btn" class="in-btn" type="submit">add</button>
+                </form>
                 <ul id="in-history" class="history">
                     <!-- <li class="row">
                         <p id="in-text" class="text">Some Text</p>
@@ -45,11 +45,11 @@
 
             <div class="expenses-wrap">
                 <h2>Expenses</h2>
-                <div class="ex-data">
-                    <input type="number" name="expenses" id="expenses" class="expenses">
-                    <input type="text" id="ex-resource" class="ex-resource">
-                    <button id="ex-btn" class="ex-btn">del</button>
-                </div>
+                <form id="form-expenses" class="ex-data">
+                    <input required type="number" name="expenses" id="expenses" class="expenses" placeholder="$">
+                    <input required type="text" name="exresource" id="ex-resource" class="ex-resource">
+                    <button id="ex-btn" class="ex-btn" type="submit">del</button>
+                </form>
                 <ul id="ex-history" class="history">
                 </ul>
             </div>

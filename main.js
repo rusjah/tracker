@@ -1,11 +1,7 @@
-const income = document.getElementById('income');
-const couseIncome = document.getElementById('in-resource');
-const incomeBtn = document.getElementById('in-btn');
-const incomeHistory = document.getElementById('in-history');
+const incomeForm = document.getElementById('form-income');
+const expensesForm = document.getElementById('form-expenses');
 
-const expenses = document.getElementById('expenses');
-const couseExpenses = document.getElementById('ex-resource');
-const expensesBtn = document.getElementById('ex-btn');
+const incomeHistory = document.getElementById('in-history');
 const expensesHistory = document.getElementById('ex-history')
 
 const totalIncome = document.getElementById('tl-income');
@@ -16,68 +12,94 @@ let sumIncome = 0;
 let sumExpenses = 0;
 let sum = 0;
 
+let historyIncomes = [];
+let historyExpenses = [];
 
-incomeBtn.addEventListener('click', () => {
-    if (income.value.length != 0) {
+
+incomeForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    historyIncomes.push( `${e.target.income.value} $ - ${e.target.inresource.value}`);
+
+    sumIncome += Number(e.target.income.value);
+    sum += Number(e.target.income.value);
+   
+    totalIncome.innerText = sumIncome;
+    balans.innerText = sum;
+
+    sizeBalanceWrap(String(sum));
+    displayHistory(historyIncomes, 'income')
+    
+    e.target.income.value = "";
+    e.target.inresource.value = "";
+ 
+})
+
+expensesForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    historyExpenses.push( `${e.target.expenses.value} ${e.target.exresource.value}`);
+
+    sumExpenses += Number(expenses.value);
+    sum -= Number(expenses.value);
+
+    totalExpenses.innerText = sumExpenses;
+    balans.innerText = sum;
+
+    sizeBalanceWrap(String(sum));
+    displayHistory(historyExpenses, 'expenses')
+    
+    e.target.expenses.value = "";
+    e.target.exresource.value = "";
+
+})
+
+
+
+function displayHistory(arr, flag) {
+    
+    if (flag == 'income') {
+        incomeHistory.textContent = ""
+    } else {
+        expensesHistory.textContent = ""
+    }
+    
+    for (let i = 0; i < arr.length; i++) {
+        const msg = arr[i];
         const li = document.createElement('li');
         const text = document.createElement('p');
         const removeItem = document.createElement('button');
-    
-        const msg = `${income.value} ${couseIncome.value}`;
-        sumIncome += Number(income.value);
-        sum += Number(income.value);
-    
+
         li.classList.add('row');
         text.classList.add('text');
         removeItem.classList.add('delete-btn');
     
         text.textContent = msg;
         removeItem.textContent = "X";
-        totalIncome.innerText = sumIncome;
-        balans.innerText = sum;
-    
+
         li.appendChild(text);
         li.appendChild(removeItem);
-        incomeHistory.appendChild(li);
-        
-        income.value = "";
-        couseIncome.value = "";
 
-        removeItem.addEventListener('click',() => {
-            removeItem.parentElement.remove();
+        if (flag == 'income') {
+            incomeHistory.appendChild(li);
+        } else {
+            expensesHistory.appendChild(li);
+        }
+
+        removeItem.addEventListener('click',(e) => {
+            console.log('before', arr);
+            console.log(removeItem.previousElementSibling.textContent);
+            arr = arr.filter(el => el != removeItem.previousElementSibling.textContent)
+            // console.log('after', arr);
+            displayHistory(arr, flag)
+            // removeItem.parentElement.remove();
         })
     }
-})
+}
 
-expensesBtn.addEventListener('click', () => {
-    if (expenses.value.length != 0) {
-        const li = document.createElement('li');
-        const text = document.createElement('p');
-        const removeItem = document.createElement('button');
-    
-        const msg = `${expenses.value} ${couseExpenses.value}`;
-        sumExpenses += Number(expenses.value);
-        sum -= Number(expenses.value);
-    
-        li.classList.add('row');
-        text.classList.add('text');
-        removeItem.classList.add('delete-btn');
-    
-        text.textContent = msg;
-        removeItem.textContent = "X";
-        totalExpenses.innerText = sumExpenses;
-        balans.innerText = sum;
-    
-        li.appendChild(text);
-        li.appendChild(removeItem);
-        expensesHistory.appendChild(li);
-        
-        expenses.value = "";
-        couseExpenses.value = "";
-
-        removeItem.addEventListener('click',() => {
-            removeItem.parentElement.remove();
-        })
+function sizeBalanceWrap(val) {
+    if( val.length >= 4) {
+        balans.style.fontSize = '3em';
     }
-})
+}
 
