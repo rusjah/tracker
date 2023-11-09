@@ -9,14 +9,18 @@ const totalIncome = document.getElementById('tl-income');
 const totalExpenses = document.getElementById('tl-expenses')
 const balans = document.getElementById('balans');
 
-let sumIncome = 0;
-let sumExpenses = 0;
-let sum = 0;
+let data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : { sumIncome: 0, sumExpenses: 0,sum: 0
+}
+
+// localStorage.clear()
 
 
 let history = localStorage.getItem('history') ? JSON.parse(localStorage.getItem('history')) : [];
 
-displayHistory()
+displayHistory(history, 'history')
+totalIncome.innerText = data.sumIncome;
+totalExpenses.innerText = data.sumExpenses;
+balans.innerText = data.sum;
 
 incomeForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -29,14 +33,17 @@ incomeForm.addEventListener('submit', (e) => {
 
     localStorage.setItem('history', JSON.stringify(history));
 
-    sumIncome += Number(e.target.income.value);
-    sum += Number(e.target.income.value);
-   
-    totalIncome.innerText = sumIncome;
-    balans.innerText = sum;
+    // data  = JSON.parse(localStorage.getItem('data'));
+    data.sumIncome += Number(e.target.income.value);
+    data.sum += Number(e.target.income.value);
+    localStorage.setItem('data', JSON.stringify(data));
 
-    sizeBalanceWrap(String(sum));
-    displayHistory()
+   
+    totalIncome.innerText = data.sumIncome;
+    balans.innerText = data.sum;
+
+    sizeBalanceWrap(String(data.sum));
+    displayHistory(history, 'history')
     
     e.target.income.value = "";
     e.target.inresource.value = "";
@@ -55,26 +62,29 @@ expensesForm.addEventListener('submit', (e) => {
 
     localStorage.setItem('history', JSON.stringify(history));
 
-    sumExpenses += Number(expenses.value);
-    sum -= Number(expenses.value);
+    // data  = JSON.parse(localStorage.getItem('data'));
+    data.sumExpenses += Number(expenses.value);
+    data.sum -= Number(expenses.value);
+    localStorage.setItem('data', JSON.stringify(data));
 
-    totalExpenses.innerText = sumExpenses;
-    balans.innerText = sum;
 
-    sizeBalanceWrap(String(sum));
-    displayHistory()
+    totalExpenses.innerText = data.sumExpenses;
+    balans.innerText = data.sum;
+
+    sizeBalanceWrap(String(data.sum));
+    displayHistory(history, 'history')
     
     e.target.expenses.value = "";
     e.target.exresource.value = "";
 
 })
 
-function displayHistory() {
-        incomeHistory.textContent = ""
-        expensesHistory.textContent = ""
+function displayHistory(arr, nameArr) {
+    incomeHistory.textContent = ""
+    expensesHistory.textContent = ""
 
-    for (let i = 0; i < history.length; i++) {
-        const element = history[i];
+    for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
         const msg = `${element.amount}$ - ${element.msg}`;
         const li = document.createElement('li');
         const text = document.createElement('p');
@@ -84,7 +94,7 @@ function displayHistory() {
         text.classList.add('text');
         removeItem.classList.add('delete-btn');
         removeItem.id = element.id;
-    
+
         text.textContent = msg;
         removeItem.textContent = "X";
 
@@ -98,81 +108,16 @@ function displayHistory() {
         }
 
         removeItem.addEventListener('click',(e) => {
-            history = history.filter(it => it.id != removeItem.id);
-            localStorage.setItem('history', JSON.stringify(history));
-           
-            displayHistory();
+            arr = arr.filter(it => it.id != removeItem.id);
+            localStorage.setItem(nameArr, JSON.stringify(arr));
+        
+            displayHistory(arr, nameArr);
         })
     }
 }
-
-
-
-// function displayHistory(arr, flag) {
-    
-//     if (flag == 'income') {
-//         incomeHistory.textContent = ""
-//     } else {
-//         expensesHistory.textContent = ""
-//     }
-    
-//     for (let i = 0; i < arr.length; i++) {
-//         // console.log('log', arr[i]);
-//         const msg = `${arr[i].amount}$ - ${arr[i].msg}`;
-//         const li = document.createElement('li');
-//         const text = document.createElement('p');
-//         const removeItem = document.createElement('button');
-
-//         li.classList.add('row');
-//         text.classList.add('text');
-//         removeItem.classList.add('delete-btn');
-//         removeItem.id = arr[i].id;
-    
-//         text.textContent = msg;
-//         removeItem.textContent = "X";
-
-//         li.appendChild(text);
-//         li.appendChild(removeItem);
-
-//         if (flag == 'income') {
-//             incomeHistory.appendChild(li);
-//         } else {
-//             expensesHistory.appendChild(li);
-//         }
-
-//         removeItem.addEventListener('click',(e) => {
-//             // console.log('remove', removeItem.id);
-//             // console.log('before', arr);
-//             arr = arr.filter(it => it.id != removeItem.id);
-
-//             // arr = arr.filter(el => el != removeItem.previousElementSibling.textContent)
-//             // console.log('after', arr);
-//             displayHistory(arr, flag)
-//             // removeItem.parentElement.remove();
-//         })
-//     }
-// }
 
 function sizeBalanceWrap(val) {
     if( val.length >= 4) {
         balans.style.fontSize = '3em';
     }
 }
-
-
-
-// let h = [
-    //     {
-    //         id: Math.floor(Math.random()* 1000),
-    //         amound: 0,
-    //         msg: '',
-    //         type: "income"
-    //     },
-    
-    //     {
-    //         id: Math.floor(Math.random()* 1000),
-    //         amound: 0,
-    //         msg: '',
-    //         type: "expenses"
-    //     }
-    // ]
